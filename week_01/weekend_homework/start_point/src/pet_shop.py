@@ -44,6 +44,12 @@ def remove_pet_by_name(pet_shop, name):
             break
 
 
+# ALT remove_pet_by_name
+# def remove_pet_by_name(pet_shop, name):
+# pet_to_delete = find_pet_by_name(pet_shop, name)
+# pet_shop["pets"].remove(pet_to_delete)
+
+
 def add_pet_to_stock(pet_shop, new_pet):
     pet_shop["pets"].append(new_pet)
 
