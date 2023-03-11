@@ -7,8 +7,9 @@ class Guest:
 
     def pay(self, amount):
         if self.wallet < amount:
-            return "Not enough funds"
+            return False
         self.wallet -= amount
+        return True
 
     def cheer(self):
         return "Woop!"
@@ -18,3 +19,6 @@ class Guest:
         # return the lyric string from the song
         # add lyric to song obj
         return "Lalalalalalalala!"
+
+    def get_drunk(self, value):
+        self.intoxication += value

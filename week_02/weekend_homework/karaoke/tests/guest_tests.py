@@ -15,10 +15,14 @@ class Test_guest(unittest.TestCase):
         self.assertEqual(90, self.guest1.wallet)
 
     def test_guest_can_pay__insufficient_funds(self):
-        self.assertEqual("Not enough funds", self.guest2.pay(10))
+        self.assertEqual(False, self.guest2.pay(10))
 
     def test_guest_can_cheer(self):
         self.assertEqual("Woop!", self.guest1.cheer())
 
     def test_guest_can_sing(self):
         self.assertEqual("Lalalalalalalala!", self.guest1.sing())
+
+    def test_guest_becomes_intoxicated(self):
+        self.guest1.get_drunk(2)
+        self.assertEqual(2, self.guest1.intoxication)

@@ -3,6 +3,8 @@ import unittest
 from classes.room import Room
 from classes.guest import Guest
 from classes.song import Song
+from classes.alcobot import Alcobot
+from classes.drink import Drink
 
 
 class TestRoom(unittest.TestCase):
@@ -25,6 +27,11 @@ class TestRoom(unittest.TestCase):
         self.song_list1 = [self.song1, self.song2]
         self.song_list2 = [self.song1, self.song2, self.song1, self.song2]
 
+        self.drink1 = Drink("Beer", 5, 2)
+        self.drink2 = Drink("Sake", 6, 4)
+        self.drinks_list = {self.drink1, self.drink2}
+        self.bot1 = Alcobot(666, 100, self.drinks_list)
+
         self.room1 = Room(
             1,
             6,
@@ -32,7 +39,7 @@ class TestRoom(unittest.TestCase):
             self.song1,
             self.song_list1,
             self.song_list2,
-            ["alcobot"],
+            self.bot1,
             100,
         )
 
@@ -59,8 +66,8 @@ class TestRoom(unittest.TestCase):
         pass
 
     def test_sell_drink(self):
-        # call alcobot.sell_drink()
-        pass
+        response = self.room1.sell_drink(self.bot1, self.guest1, "Beer")
+        self.assertEqual("Beer", response.name)
 
     def test_sell_drink__guest_intoxicated(self):
         pass

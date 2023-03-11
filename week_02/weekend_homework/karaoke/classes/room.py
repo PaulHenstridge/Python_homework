@@ -35,9 +35,14 @@ class Room:
         # add extra songs to available_songs
         pass
 
-    def sell_drink(self, barbot, guest, drink):
-        # call barbot.sell_drink(guest, drink)
-        pass
+    def sell_drink(self, alcobot, guest, drink_name):
+        price = [drink.price for drink in alcobot.drinks if drink.name == drink_name]
+        if guest.pay(price[0]):
+            drink = alcobot.sell_drink(guest, drink_name)
+            guest.get_drunk(drink.alco_level)
+            return drink
+        else:
+            return "insufficient funds"
 
     def end_session(self):
         pass
