@@ -5,11 +5,11 @@ class Guest:
         self.fav_song = fav_song
         self.intoxication = intoxication
 
+    def can_pay(self, amount):
+        return self.wallet > amount
+
     def pay(self, amount):
-        if self.wallet < amount:
-            return False
         self.wallet -= amount
-        return True
 
     def cheer(self):
         return "Woop!"

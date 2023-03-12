@@ -8,7 +8,6 @@ class Room:
         available_songs,
         extra_songs,
         alcobot,
-        revenue,
     ):
         self.id = id
         self.capacity = capacity
@@ -17,14 +16,23 @@ class Room:
         self.available_songs = available_songs
         self.extra_songs = extra_songs
         self.alcobot = alcobot
+        self.takings = 0
+        self._entry_fee = 10
 
     def check_in(self, guest, current_guests):
         if len(current_guests) >= self.capacity:
             return "sorry, room is full"
-        self.guests.append(guest)
+        if guest.can_pay(self._entry_fee):
+            guest.pay(self._entry_fee)
+            self.accept_payment(self._entry_fee)
+
+            self.guests.append(guest)
 
     def check_out(self, guest):
         self.guests.remove(guest)
+
+    def accept_payment(self, amount):
+        self.takings += amount
 
     def play_song(self, song):
         # check if song is in list
@@ -37,12 +45,15 @@ class Room:
 
     def sell_drink(self, alcobot, guest, drink_name):
         price = [drink.price for drink in alcobot.drinks if drink.name == drink_name]
-        if guest.pay(price[0]):
+        strength = [
+            drink.alco_level for drink in alcobot.drinks if drink.name == drink_name
+        ]
+        if guest.can_pay(price[0]) and alcobot.breathalize(guest):
             drink = alcobot.sell_drink(guest, drink_name)
-            guest.get_drunk(drink.alco_level)
+            guest.get_drunk(strength[0])
             return drink
         else:
-            return "insufficient funds"
+            return "Sorry, no service"
 
     def end_session(self):
         pass

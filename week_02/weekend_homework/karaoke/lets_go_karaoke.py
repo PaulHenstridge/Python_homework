@@ -35,7 +35,6 @@ room1 = Room(
     song_list1,
     song_list2,
     bot1,
-    100,
 )
 
 
@@ -56,7 +55,7 @@ def lets_go_karaoke():
 
         while user_checked_in:
             choice = input(
-                "OK, do you want to drink (d), sing (s), or cheer (c)?  If you have had enough fun you can exit(x)"
+                "OK, do you want to drink (d), sing (s), or hear a joke from the robo-bartender (j)?  If you have had enough fun you can exit (x)"
             )
             if choice == "x":
                 user_checked_in = False
@@ -70,6 +69,9 @@ def lets_go_karaoke():
                 if drink_choice == "s":
                     drink_choice == "Sake"
                 room1.sell_drink(bot1, user, drink_choice)
+
+            if choice == "j":
+                print(bot1.tell_joke())
 
 
 # lets_go_karaoke()

@@ -40,7 +40,6 @@ class TestRoom(unittest.TestCase):
             self.song_list1,
             self.song_list2,
             self.bot1,
-            100,
         )
 
     def test_room_has_capacity(self):
@@ -60,17 +59,29 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(1, len(self.room1.guests))
 
     def test_room_accepts_payment(self):
-        pass
+        self.room1.check_in(self.guest1, self.group1)
+        self.assertEqual(10, self.room1.takings)
+        self.assertEqual(90, self.guest1.wallet)
 
-    def test_display_revenue(self):
-        pass
+    def test_room_is_full(self):
+        check_in_attempt = self.room1.check_in(self.guest1, self.group2)
+        self.assertEqual("sorry, room is full", check_in_attempt)
+
+    def test_display_takings(self):
+        self.room1.check_in(self.guest1, self.group1)
+        self.assertEqual(10, self.room1.takings)
 
     def test_sell_drink(self):
         response = self.room1.sell_drink(self.bot1, self.guest1, "Beer")
         self.assertEqual("Beer", response.name)
 
-    def test_sell_drink__guest_intoxicated(self):
-        pass
+    def test_alcohol_gets_guest_drunk(self):
+        self.room1.sell_drink(self.bot1, self.guest1, "Beer")
+        self.assertEqual(2, self.guest1.intoxication)
+
+    def test_sell_drink__guest_too_drunk(self):
+        attempt_buy_drink = self.room1.sell_drink(self.bot1, self.guest2, "Beer")
+        self.assertEqual("Sorry, no service", attempt_buy_drink)
 
     def test_add_extra_songs(self):
         pass

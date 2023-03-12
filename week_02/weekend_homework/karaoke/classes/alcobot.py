@@ -10,9 +10,11 @@ class Alcobot:
         if self.breathalize(guest):
             for drink in self.drinks:
                 if drink.name == drink_name:
-                    self.till += drink.price
-                    self.drinks_sold += 1
-                    return drink
+                    if guest.can_pay(drink.price):
+                        guest.pay(drink.price)
+                        self.till += drink.price
+                        self.drinks_sold += 1
+                        return drink
             return f"{drink_name} is not available"
         return f"You are a level {guest.intoxication} drunk! No more booze!"
 
