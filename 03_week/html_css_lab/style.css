@@ -1,0 +1,83 @@
+/* #2090FE */
+
+:root {
+    --clr-main: #2090FE;
+    --clr-light: aliceblue;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--clr-light);
+}
+
+header {
+    background-color: var(--clr-main);
+    padding: 1rem;
+    text-align: center;
+}
+
+header>ul {
+    list-style-type: none
+}
+
+header>ul>li>a {
+    color: var(--clr-light);
+    /* text-decoration: none; */
+}
+
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+
+}
+
+form,
+menu,
+article {
+    padding-bottom: 1em;
+}
+
+h3 {
+    padding-top: 1em
+}
+
+article.comment {
+    border-top: 1px solid black
+}
+
+p.extendable {
+    height: 1.1em;
+    overflow: hidden;
+}
+
+p.extendable:active {
+    height: auto;
+}
+
+i {
+    padding: 2rem;
+    font-size: 2em;
+    color: var(--clr-main);
+    /* border: 1px solid var(--clr-main); */
+
+}
+
+section {
+    background-color: #208ffe0d;
+}
+
+footer {
+    background-color: var(--clr-main);
+    padding: 0.5em;
+    color: var(--clr-light);
+    text-align: center;
+}
