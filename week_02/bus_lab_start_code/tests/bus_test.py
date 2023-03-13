@@ -3,6 +3,7 @@ from src.bus import Bus
 from src.bus_stop import BusStop
 from src.person import Person
 
+
 class TestBus(unittest.TestCase):
     def setUp(self):
         self.bus = Bus(22, "Ocean Terminal")
@@ -11,11 +12,9 @@ class TestBus(unittest.TestCase):
     def test_has_route_number(self):
         self.assertEqual(22, self.bus.route_number)
 
-
     # @unittest.skip("Delete this line to run the test")
     def test_has_destination(self):
         self.assertEqual("Ocean Terminal", self.bus.destination)
-
 
     # @unittest.skip("Delete this line to run the test")
     def test_can_drive(self):
